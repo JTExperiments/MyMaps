@@ -16,6 +16,8 @@
 		1A3C7B611B3007A800706B7A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B601B3007A800706B7A /* RootViewController.swift */; };
 		1A3C7B631B30091D00706B7A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B621B30091D00706B7A /* MapViewController.swift */; };
 		1A3C7B651B300AB600706B7A /* SearchPlacesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B641B300AB600706B7A /* SearchPlacesOperation.swift */; };
+		1A3C7B671B30221500706B7A /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B661B30221500706B7A /* PlaceTableViewCell.swift */; };
+		1A3C7B691B3023D200706B7A /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B681B3023D200706B7A /* Place.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		1A3C7B601B3007A800706B7A /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		1A3C7B621B30091D00706B7A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1A3C7B641B300AB600706B7A /* SearchPlacesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesOperation.swift; sourceTree = "<group>"; };
+		1A3C7B661B30221500706B7A /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
+		1A3C7B681B3023D200706B7A /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 				1A3C7B461B30070100706B7A /* LaunchScreen.xib */,
 				1A3C7B3B1B30070100706B7A /* Supporting Files */,
 				1A3C7B641B300AB600706B7A /* SearchPlacesOperation.swift */,
+				1A3C7B661B30221500706B7A /* PlaceTableViewCell.swift */,
+				1A3C7B681B3023D200706B7A /* Place.swift */,
 			);
 			path = MyMaps;
 			sourceTree = "<group>";
@@ -233,7 +239,9 @@
 				1A3C7B3E1B30070100706B7A /* AppDelegate.swift in Sources */,
 				1A3C7B651B300AB600706B7A /* SearchPlacesOperation.swift in Sources */,
 				1A3C7B611B3007A800706B7A /* RootViewController.swift in Sources */,
+				1A3C7B691B3023D200706B7A /* Place.swift in Sources */,
 				1A3C7B631B30091D00706B7A /* MapViewController.swift in Sources */,
+				1A3C7B671B30221500706B7A /* PlaceTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

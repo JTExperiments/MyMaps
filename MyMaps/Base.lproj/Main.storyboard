@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E7f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zi2-em-WHa">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Map View Controller-->
@@ -50,6 +51,37 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oc6-bk-epb">
                                 <rect key="frame" x="552" y="20" width="20" height="20"/>
                             </activityIndicatorView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xJP-Rf-iU2">
+                                <rect key="frame" x="0.0" y="300" width="600" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="QK2-9l-0b0" detailTextLabel="GES-RI-YZG" rowHeight="58" style="IBUITableViewCellStyleSubtitle" id="Hzo-ap-jOW" customClass="PlaceTableViewCell" customModule="MyMaps" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hzo-ap-jOW" id="Ku9-ea-oye">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QK2-9l-0b0">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GES-RI-YZG">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="zi2-em-WHa" id="zfi-sn-KKT"/>
+                                    <outlet property="delegate" destination="zi2-em-WHa" id="eed-9X-xjV"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -57,16 +89,26 @@
                             <constraint firstItem="UFP-O4-K6T" firstAttribute="top" secondItem="bhg-tR-bnv" secondAttribute="bottom" id="5fW-2m-Ret"/>
                             <constraint firstItem="nzN-Z3-9GB" firstAttribute="top" secondItem="BKP-SW-Tps" secondAttribute="top" constant="15" id="8tJ-V7-6TL"/>
                             <constraint firstAttribute="trailing" secondItem="oc6-bk-epb" secondAttribute="trailing" constant="28" id="Bqf-PU-EC6"/>
+                            <constraint firstItem="xJP-Rf-iU2" firstAttribute="height" secondItem="BKP-SW-Tps" secondAttribute="height" multiplier="0.5" id="GRK-Hv-hAC"/>
                             <constraint firstAttribute="trailing" secondItem="zYC-2w-4HU" secondAttribute="trailing" constant="15" id="IEk-Lr-yMh"/>
                             <constraint firstItem="kKu-fx-Vvf" firstAttribute="leading" secondItem="BKP-SW-Tps" secondAttribute="leading" constant="15" id="NwO-xP-4Gk"/>
+                            <constraint firstItem="xJP-Rf-iU2" firstAttribute="width" secondItem="BKP-SW-Tps" secondAttribute="width" id="WwK-Li-bG9"/>
                             <constraint firstItem="kKu-fx-Vvf" firstAttribute="top" secondItem="BKP-SW-Tps" secondAttribute="top" constant="15" id="Y8s-Kt-fBC"/>
                             <constraint firstItem="zYC-2w-4HU" firstAttribute="top" secondItem="BKP-SW-Tps" secondAttribute="top" constant="15" id="Yvo-ke-PwR"/>
                             <constraint firstAttribute="trailing" secondItem="bhg-tR-bnv" secondAttribute="trailing" id="cV5-8z-nkn"/>
                             <constraint firstItem="zYC-2w-4HU" firstAttribute="leading" secondItem="nzN-Z3-9GB" secondAttribute="trailing" constant="15" id="dY3-bh-L7a"/>
                             <constraint firstItem="bhg-tR-bnv" firstAttribute="top" secondItem="BKP-SW-Tps" secondAttribute="top" id="hvs-ir-fqK"/>
+                            <constraint firstAttribute="trailing" secondItem="xJP-Rf-iU2" secondAttribute="trailing" id="nMC-vb-Lzt"/>
                             <constraint firstItem="bhg-tR-bnv" firstAttribute="leading" secondItem="BKP-SW-Tps" secondAttribute="leading" id="nlI-78-YLs"/>
+                            <constraint firstItem="xJP-Rf-iU2" firstAttribute="leading" secondItem="BKP-SW-Tps" secondAttribute="leading" id="qg6-Ol-vej"/>
+                            <constraint firstItem="UFP-O4-K6T" firstAttribute="top" secondItem="xJP-Rf-iU2" secondAttribute="bottom" id="tlf-Ia-EIs"/>
                             <constraint firstItem="nzN-Z3-9GB" firstAttribute="leading" secondItem="kKu-fx-Vvf" secondAttribute="trailing" constant="17" id="ueW-ky-Muh"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="WwK-Li-bG9"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="addressTextField" destination="nzN-Z3-9GB" id="hpi-jA-HeO"/>
@@ -74,6 +116,7 @@
                         <outlet property="loadingIndicator" destination="oc6-bk-epb" id="IBk-59-v0m"/>
                         <outlet property="mapView" destination="bhg-tR-bnv" id="wrf-3w-rCk"/>
                         <outlet property="searchButton" destination="zYC-2w-4HU" id="LF1-IN-DxN"/>
+                        <outlet property="tableView" destination="xJP-Rf-iU2" id="53c-L4-5Cw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aAh-ga-ybU" userLabel="First Responder" sceneMemberID="firstResponder"/>

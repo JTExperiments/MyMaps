@@ -79,15 +79,26 @@ public class BaseOperation : NSOperation {
 
 public class SearchPlacesOperation:BaseOperation {
 
-    public typealias Response = MKLocalSearchResponse
+    public typealias Response = [Place]
     public typealias Error = NSError
     public typealias CompletionHandler = (response: Response?, error: Error?)->()
     public var completion : CompletionHandler? {
         didSet {
             self.completionBlock = {
                 if let completion = self.completion {
+
+                    var places : [Place]?
+                    if let response = self.response {
+                        places = []
+                        for mapItem in response.mapItems {
+                            if let item = mapItem as? MKMapItem {
+                                places?.append(Place(mapItem: item))
+                            }
+                        }
+                    }
+
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        completion(response: self.response, error: self.error)
+                        completion(response: places, error: self.error)
                     })
                 }
             }
@@ -96,7 +107,7 @@ public class SearchPlacesOperation:BaseOperation {
     
     private let address : String
     private let region : MKCoordinateRegion
-    private var response : Response?
+    private var response : MKLocalSearchResponse?
     private var error: Error?
 
     public init(address: String, region: MKCoordinateRegion) {

@@ -14,8 +14,11 @@ class MapViewController: RootViewController {
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var listButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+
+    var places : [Place] = []
 
     var searching: Bool = false {
         didSet {
@@ -33,6 +36,13 @@ class MapViewController: RootViewController {
         } else {
             self.loadingIndicator.stopAnimating()
         }
+
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        for place in self.places {
+            self.mapView.addAnnotation(place)
+        }
+
+        self.tableView.reloadData()
     }
 
     func search() {
@@ -44,12 +54,7 @@ class MapViewController: RootViewController {
         self.searching = true
         searchOperation.completion = { response, error in
             if let response = response {
-                for item in response.mapItems {
-                    if let item = item as? MKMapItem {
-                        self.mapView.addAnnotation(item.placemark)
-
-                    }
-                }
+                self.places = response
             }
             self.searching = false
         }
@@ -61,7 +66,6 @@ class MapViewController: RootViewController {
 
 }
 
-
 extension MapViewController : UITextFieldDelegate {
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -69,4 +73,22 @@ extension MapViewController : UITextFieldDelegate {
         return true
     }
 
+}
+
+extension MapViewController : UITableViewDataSource {
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.places.count
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
+        let place = self.places[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! PlaceTableViewCell
+
+        cell.name = place.title
+        cell.address = place.subtitle
+
+        return cell
+    }
 }
