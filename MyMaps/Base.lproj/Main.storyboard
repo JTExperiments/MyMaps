@@ -17,40 +17,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bhg-tR-bnv">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKu-fx-Vvf">
-                                <rect key="frame" x="15" y="15" width="30" height="30"/>
-                                <state key="normal" title="list">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Jmb-h7-nki" kind="popoverPresentation" popoverAnchorView="kKu-fx-Vvf" id="faG-dh-Ec0">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nzN-Z3-9GB">
-                                <rect key="frame" x="62" y="15" width="462" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="zi2-em-WHa" id="fl2-8c-tnG"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYC-2w-4HU">
-                                <rect key="frame" x="539" y="15" width="46" height="30"/>
-                                <state key="normal" title="search">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="searchButtonDidPress:" destination="zi2-em-WHa" eventType="touchUpInside" id="c7g-lE-K7E"/>
-                                </connections>
-                            </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oc6-bk-epb">
-                                <rect key="frame" x="552" y="20" width="20" height="20"/>
-                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ucf-lu-Bzo" customClass="MapView" customModule="MyMaps" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="104" width="600" height="196"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jpf-vI-0Cu">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="104"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oc6-bk-epb">
+                                        <rect key="frame" x="557" y="59" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nzN-Z3-9GB">
+                                        <rect key="frame" x="67" y="54" width="462" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="zi2-em-WHa" id="fl2-8c-tnG"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKu-fx-Vvf">
+                                        <rect key="frame" x="20" y="54" width="30" height="30"/>
+                                        <state key="normal" title="list">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Jmb-h7-nki" kind="popoverPresentation" popoverAnchorView="kKu-fx-Vvf" id="faG-dh-Ec0">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYC-2w-4HU">
+                                        <rect key="frame" x="544" y="54" width="46" height="30"/>
+                                        <state key="normal" title="search">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchButtonDidPress:" destination="zi2-em-WHa" eventType="touchUpInside" id="c7g-lE-K7E"/>
+                                        </connections>
+                                    </button>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="U7I-hm-3c2">
+                                        <rect key="frame" x="239" y="18" width="117" height="29"/>
+                                        <segments>
+                                            <segment title="Apple"/>
+                                            <segment title="Google"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentDidChange:" destination="zi2-em-WHa" eventType="valueChanged" id="fUd-gB-1Ec"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="oc6-bk-epb" secondAttribute="trailing" constant="23" id="3Lu-Bz-6jx"/>
+                                    <constraint firstAttribute="centerX" secondItem="U7I-hm-3c2" secondAttribute="centerX" constant="2.5" id="5zR-Vm-eU9"/>
+                                    <constraint firstAttribute="height" constant="104" id="90v-MW-7o6"/>
+                                    <constraint firstItem="U7I-hm-3c2" firstAttribute="top" secondItem="Jpf-vI-0Cu" secondAttribute="top" constant="18" id="Jcy-RE-hUR"/>
+                                    <constraint firstItem="kKu-fx-Vvf" firstAttribute="top" secondItem="nzN-Z3-9GB" secondAttribute="top" id="RAC-1i-2hz"/>
+                                    <constraint firstAttribute="trailing" secondItem="zYC-2w-4HU" secondAttribute="trailing" constant="10" id="RvG-6M-0Hj"/>
+                                    <constraint firstItem="nzN-Z3-9GB" firstAttribute="leading" secondItem="kKu-fx-Vvf" secondAttribute="trailing" constant="17" id="TuW-8c-vmd"/>
+                                    <constraint firstItem="kKu-fx-Vvf" firstAttribute="leading" secondItem="Jpf-vI-0Cu" secondAttribute="leading" constant="20" id="VRf-B1-hR6"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="104" id="dgH-J9-cHf"/>
+                                    <constraint firstItem="kKu-fx-Vvf" firstAttribute="top" secondItem="Jpf-vI-0Cu" secondAttribute="top" constant="54" id="duT-p5-52f"/>
+                                    <constraint firstItem="zYC-2w-4HU" firstAttribute="leading" secondItem="nzN-Z3-9GB" secondAttribute="trailing" constant="15" id="dv4-yq-UGR"/>
+                                    <constraint firstItem="nzN-Z3-9GB" firstAttribute="centerY" secondItem="oc6-bk-epb" secondAttribute="centerY" id="sva-vI-efq"/>
+                                    <constraint firstItem="kKu-fx-Vvf" firstAttribute="top" secondItem="zYC-2w-4HU" secondAttribute="top" id="ydy-i1-78r"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xJP-Rf-iU2">
                                 <rect key="frame" x="0.0" y="300" width="600" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -85,24 +117,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oc6-bk-epb" firstAttribute="top" secondItem="8GQ-Yh-BEG" secondAttribute="bottom" id="3ph-j8-rk3"/>
-                            <constraint firstItem="UFP-O4-K6T" firstAttribute="top" secondItem="bhg-tR-bnv" secondAttribute="bottom" id="5fW-2m-Ret"/>
-                            <constraint firstItem="nzN-Z3-9GB" firstAttribute="top" secondItem="BKP-SW-Tps" secondAttribute="top" constant="15" id="8tJ-V7-6TL"/>
-                            <constraint firstAttribute="trailing" secondItem="oc6-bk-epb" secondAttribute="trailing" constant="28" id="Bqf-PU-EC6"/>
+                            <constraint firstItem="xJP-Rf-iU2" firstAttribute="top" secondItem="Ucf-lu-Bzo" secondAttribute="bottom" id="G50-13-vvp"/>
+                            <constraint firstItem="Jpf-vI-0Cu" firstAttribute="leading" secondItem="BKP-SW-Tps" secondAttribute="leading" id="GHB-x2-SaV"/>
                             <constraint firstItem="xJP-Rf-iU2" firstAttribute="height" secondItem="BKP-SW-Tps" secondAttribute="height" multiplier="0.5" id="GRK-Hv-hAC"/>
-                            <constraint firstAttribute="trailing" secondItem="zYC-2w-4HU" secondAttribute="trailing" constant="15" id="IEk-Lr-yMh"/>
-                            <constraint firstItem="kKu-fx-Vvf" firstAttribute="leading" secondItem="BKP-SW-Tps" secondAttribute="leading" constant="15" id="NwO-xP-4Gk"/>
+                            <constraint firstAttribute="trailing" secondItem="Jpf-vI-0Cu" secondAttribute="trailing" id="MR7-l0-vxG"/>
+                            <constraint firstItem="Ucf-lu-Bzo" firstAttribute="leading" secondItem="BKP-SW-Tps" secondAttribute="leading" id="NFm-7E-0Le"/>
                             <constraint firstItem="xJP-Rf-iU2" firstAttribute="width" secondItem="BKP-SW-Tps" secondAttribute="width" id="WwK-Li-bG9"/>
-                            <constraint firstItem="kKu-fx-Vvf" firstAttribute="top" secondItem="BKP-SW-Tps" secondAttribute="top" constant="15" id="Y8s-Kt-fBC"/>
-                            <constraint firstItem="zYC-2w-4HU" firstAttribute="top" secondItem="BKP-SW-Tps" secondAttribute="top" constant="15" id="Yvo-ke-PwR"/>
-                            <constraint firstAttribute="trailing" secondItem="bhg-tR-bnv" secondAttribute="trailing" id="cV5-8z-nkn"/>
-                            <constraint firstItem="zYC-2w-4HU" firstAttribute="leading" secondItem="nzN-Z3-9GB" secondAttribute="trailing" constant="15" id="dY3-bh-L7a"/>
-                            <constraint firstItem="bhg-tR-bnv" firstAttribute="top" secondItem="BKP-SW-Tps" secondAttribute="top" id="hvs-ir-fqK"/>
+                            <constraint firstAttribute="trailing" secondItem="Ucf-lu-Bzo" secondAttribute="trailing" id="boQ-Lz-mPY"/>
+                            <constraint firstItem="Ucf-lu-Bzo" firstAttribute="top" secondItem="Jpf-vI-0Cu" secondAttribute="bottom" id="fpZ-Ig-0ko"/>
                             <constraint firstAttribute="trailing" secondItem="xJP-Rf-iU2" secondAttribute="trailing" id="nMC-vb-Lzt"/>
-                            <constraint firstItem="bhg-tR-bnv" firstAttribute="leading" secondItem="BKP-SW-Tps" secondAttribute="leading" id="nlI-78-YLs"/>
                             <constraint firstItem="xJP-Rf-iU2" firstAttribute="leading" secondItem="BKP-SW-Tps" secondAttribute="leading" id="qg6-Ol-vej"/>
                             <constraint firstItem="UFP-O4-K6T" firstAttribute="top" secondItem="xJP-Rf-iU2" secondAttribute="bottom" id="tlf-Ia-EIs"/>
-                            <constraint firstItem="nzN-Z3-9GB" firstAttribute="leading" secondItem="kKu-fx-Vvf" secondAttribute="trailing" constant="17" id="ueW-ky-Muh"/>
+                            <constraint firstItem="Jpf-vI-0Cu" firstAttribute="top" secondItem="BKP-SW-Tps" secondAttribute="top" id="xpj-YJ-VQo"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -114,8 +140,9 @@
                         <outlet property="addressTextField" destination="nzN-Z3-9GB" id="hpi-jA-HeO"/>
                         <outlet property="listButton" destination="kKu-fx-Vvf" id="lDb-1k-MkB"/>
                         <outlet property="loadingIndicator" destination="oc6-bk-epb" id="IBk-59-v0m"/>
-                        <outlet property="mapView" destination="bhg-tR-bnv" id="wrf-3w-rCk"/>
+                        <outlet property="mapView" destination="Ucf-lu-Bzo" id="UQH-tA-SeL"/>
                         <outlet property="searchButton" destination="zYC-2w-4HU" id="LF1-IN-DxN"/>
+                        <outlet property="segment" destination="U7I-hm-3c2" id="MGK-1i-Aci"/>
                         <outlet property="tableView" destination="xJP-Rf-iU2" id="53c-L4-5Cw"/>
                     </connections>
                 </viewController>

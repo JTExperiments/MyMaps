@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-public class Place : NSObject, MKAnnotation {
+public class Place : NSObject, MKAnnotation, Equatable {
 
     let mapItem: MKMapItem
 
@@ -34,4 +34,15 @@ public class Place : NSObject, MKAnnotation {
     public init(mapItem: MKMapItem) {
         self.mapItem = mapItem
     }
+}
+
+public func ==(lhs: Place, rhs: Place) -> Bool {
+
+    if lhs.title == rhs.title
+        && lhs.subtitle == rhs.subtitle
+        && lhs.coordinate.latitude == rhs.coordinate.latitude
+        && lhs.coordinate.longitude == rhs.coordinate.longitude {
+            return true
+    }
+    return false
 }

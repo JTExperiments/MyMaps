@@ -13,13 +13,14 @@ class MapViewController: RootViewController {
 
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var listButton: UIButton!
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var mapView: MapView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var segment: UISegmentedControl!
 
     var places : [Place] = []
-
+    var selectedPlace : Place?
     var searching: Bool = false {
         didSet {
             self.reloadState()
@@ -28,6 +29,7 @@ class MapViewController: RootViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.mapView.delegate = self
     }
 
     func reloadState() {
@@ -37,10 +39,8 @@ class MapViewController: RootViewController {
             self.loadingIndicator.stopAnimating()
         }
 
-        self.mapView.removeAnnotations(self.mapView.annotations)
-        for place in self.places {
-            self.mapView.addAnnotation(place)
-        }
+        self.mapView.removePlaces(self.mapView.places)
+        self.mapView.addPlaces(self.places)
 
         self.tableView.reloadData()
     }
@@ -64,6 +64,13 @@ class MapViewController: RootViewController {
         self.search()
     }
 
+    @IBAction func segmentDidChange(sender: AnyObject) {
+        if self.segment.selectedSegmentIndex == 0 {
+            self.mapView.provider = .Apple
+        } else {
+            self.mapView.provider = .Google
+        }
+    }
 }
 
 extension MapViewController : UITextFieldDelegate {
@@ -88,7 +95,22 @@ extension MapViewController : UITableViewDataSource {
 
         cell.name = place.title
         cell.address = place.subtitle
+        cell.accessoryType = place == self.selectedPlace ? .Checkmark : .None
 
         return cell
     }
+}
+
+extension MapViewController : MapViewDelegate {
+
+    func mapView(mapView: MapView, didTapPlace place: Place) {
+        self.selectedPlace = place
+        if let row = find(self.places, place) {
+            let indexPath = NSIndexPath(forRow: row, inSection: 0)
+            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+            self.tableView.reloadData()
+        }
+
+    }
+
 }
