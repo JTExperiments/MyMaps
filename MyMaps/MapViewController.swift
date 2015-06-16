@@ -38,7 +38,7 @@ class MapViewController: RootViewController {
         }
 
         self.mapView.removePlaces(self.mapView.places)
-        self.mapView.addPlaces(self.places)
+        self.mapView.showPlaces(self.places)
 
         self.listHeightConstraint.constant = self.showList ? self.view.frame.size.height / 2 : 0
         UIView.animateWithDuration(0.3, animations: { () -> Void in

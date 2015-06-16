@@ -63,6 +63,11 @@ class MapView: UIView {
         self.appleMapView.addAnnotations(places)
         self.googleMapView.addAnnotations(places)
     }
+    func showPlaces(places: [Place]) {
+        self.places += places
+        self.appleMapView.showAnnotations(places, animated: true)
+        self.googleMapView.addAnnotations(places)
+    }
 
 }
 
