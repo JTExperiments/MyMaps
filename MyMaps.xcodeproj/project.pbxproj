@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1A3C7B3E1B30070100706B7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B3D1B30070100706B7A /* AppDelegate.swift */; };
-		1A3C7B401B30070100706B7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B3F1B30070100706B7A /* ViewController.swift */; };
 		1A3C7B431B30070100706B7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A3C7B411B30070100706B7A /* Main.storyboard */; };
 		1A3C7B451B30070100706B7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A3C7B441B30070100706B7A /* Images.xcassets */; };
 		1A3C7B481B30070100706B7A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A3C7B461B30070100706B7A /* LaunchScreen.xib */; };
 		1A3C7B541B30070100706B7A /* MyMapsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B531B30070100706B7A /* MyMapsTests.swift */; };
+		1A3C7B5E1B30074D00706B7A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3C7B5D1B30074D00706B7A /* MapKit.framework */; };
+		1A3C7B611B3007A800706B7A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B601B3007A800706B7A /* RootViewController.swift */; };
+		1A3C7B631B30091D00706B7A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B621B30091D00706B7A /* MapViewController.swift */; };
+		1A3C7B651B300AB600706B7A /* SearchPlacesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B641B300AB600706B7A /* SearchPlacesOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +32,16 @@
 		1A3C7B381B30070100706B7A /* MyMaps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMaps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A3C7B3C1B30070100706B7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A3C7B3D1B30070100706B7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1A3C7B3F1B30070100706B7A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1A3C7B421B30070100706B7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A3C7B441B30070100706B7A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1A3C7B471B30070100706B7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		1A3C7B4D1B30070100706B7A /* MyMapsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyMapsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A3C7B521B30070100706B7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A3C7B531B30070100706B7A /* MyMapsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMapsTests.swift; sourceTree = "<group>"; };
+		1A3C7B5D1B30074D00706B7A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1A3C7B601B3007A800706B7A /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		1A3C7B621B30091D00706B7A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1A3C7B641B300AB600706B7A /* SearchPlacesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A3C7B5E1B30074D00706B7A /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +66,7 @@
 		1A3C7B2F1B30070100706B7A = {
 			isa = PBXGroup;
 			children = (
+				1A3C7B5F1B30075200706B7A /* Frameworks */,
 				1A3C7B3A1B30070100706B7A /* MyMaps */,
 				1A3C7B501B30070100706B7A /* MyMapsTests */,
 				1A3C7B391B30070100706B7A /* Products */,
@@ -78,11 +86,13 @@
 			isa = PBXGroup;
 			children = (
 				1A3C7B3D1B30070100706B7A /* AppDelegate.swift */,
-				1A3C7B3F1B30070100706B7A /* ViewController.swift */,
+				1A3C7B621B30091D00706B7A /* MapViewController.swift */,
+				1A3C7B601B3007A800706B7A /* RootViewController.swift */,
 				1A3C7B411B30070100706B7A /* Main.storyboard */,
 				1A3C7B441B30070100706B7A /* Images.xcassets */,
 				1A3C7B461B30070100706B7A /* LaunchScreen.xib */,
 				1A3C7B3B1B30070100706B7A /* Supporting Files */,
+				1A3C7B641B300AB600706B7A /* SearchPlacesOperation.swift */,
 			);
 			path = MyMaps;
 			sourceTree = "<group>";
@@ -110,6 +120,14 @@
 				1A3C7B521B30070100706B7A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1A3C7B5F1B30075200706B7A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A3C7B5D1B30074D00706B7A /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,8 +230,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A3C7B401B30070100706B7A /* ViewController.swift in Sources */,
 				1A3C7B3E1B30070100706B7A /* AppDelegate.swift in Sources */,
+				1A3C7B651B300AB600706B7A /* SearchPlacesOperation.swift in Sources */,
+				1A3C7B611B3007A800706B7A /* RootViewController.swift in Sources */,
+				1A3C7B631B30091D00706B7A /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
