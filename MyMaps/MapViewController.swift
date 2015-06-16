@@ -13,6 +13,7 @@ class MapViewController: RootViewController {
 
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var listButton: UIButton!
+    @IBOutlet var listHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MapView!
     @IBOutlet weak var tableView: UITableView!
@@ -21,11 +22,8 @@ class MapViewController: RootViewController {
 
     var places : [Place] = []
     var selectedPlace : Place?
-    var searching: Bool = false {
-        didSet {
-            self.reloadState()
-        }
-    }
+    var searching: Bool = false { didSet { self.reloadState() }}
+    var showList: Bool = false { didSet { self.reloadState() }}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +39,11 @@ class MapViewController: RootViewController {
 
         self.mapView.removePlaces(self.mapView.places)
         self.mapView.addPlaces(self.places)
+
+        self.listHeightConstraint.constant = self.showList ? self.view.frame.size.height / 2 : 0
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
 
         self.tableView.reloadData()
     }
@@ -58,6 +61,18 @@ class MapViewController: RootViewController {
             }
             self.searching = false
         }
+        self.view.endEditing(true)
+    }
+
+    func toggleList() {
+        self.showList = !self.showList
+        self.reloadState()
+        self.view.endEditing(true)
+    }
+
+    // MARK: Action
+    @IBAction func listButtonDidPress(sender: AnyObject) {
+        self.toggleList()
     }
 
     @IBAction func searchButtonDidPress(sender: AnyObject) {
