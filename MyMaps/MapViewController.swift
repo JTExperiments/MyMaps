@@ -38,7 +38,7 @@ class MapViewController: RootViewController {
         }
 
         self.mapView.removePlaces(self.mapView.places)
-        self.mapView.showPlaces(self.places)
+        self.mapView.showPlaces(self.places, animated:true)
 
         self.listHeightConstraint.constant = self.showList ? self.view.frame.size.height / 2 : 0
         UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -49,17 +49,17 @@ class MapViewController: RootViewController {
     }
 
     func search() {
-        let address = self.addressTextField.text
+        if let address = self.addressTextField.text {
+            let searchOperation = SearchPlacesOperation(address: address, region: self.mapView.region)
+            NSOperationQueue.mainQueue().addOperation(searchOperation)
 
-        let searchOperation = SearchPlacesOperation(address: address, region: self.mapView.region)
-        NSOperationQueue.mainQueue().addOperation(searchOperation)
-
-        self.searching = true
-        searchOperation.completion = { response, error in
-            if let response = response {
-                self.places = response
+            self.searching = true
+            searchOperation.completion = { response, error in
+                if let response = response {
+                    self.places = response
+                }
+                self.searching = false
             }
-            self.searching = false
         }
         self.view.endEditing(true)
     }
@@ -81,9 +81,9 @@ class MapViewController: RootViewController {
 
     @IBAction func segmentDidChange(sender: AnyObject) {
         if self.segment.selectedSegmentIndex == 0 {
-            self.mapView.provider = .Apple
+            self.mapView.displaying = .Apple
         } else {
-            self.mapView.provider = .Google
+            self.mapView.displaying = .Google
         }
     }
 }
@@ -120,7 +120,7 @@ extension MapViewController : MapViewDelegate {
 
     func mapView(mapView: MapView, didTapPlace place: Place) {
         self.selectedPlace = place
-        if let row = find(self.places, place) {
+        if let row = self.places.indexOf(place) {
             let indexPath = NSIndexPath(forRow: row, inSection: 0)
             self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
             self.tableView.reloadData()

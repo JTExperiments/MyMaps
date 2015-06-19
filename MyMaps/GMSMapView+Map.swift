@@ -10,12 +10,10 @@ import Foundation
 import GoogleMaps
 import MapKit
 
-final class GoogleMapView : GMSMapView, Map {
-
+extension GMSMapView : Map {
     // stackoverflow http://stackoverflow.com/a/30938225/1013897
     var region : MKCoordinateRegion {
         get {
-            let position = self.camera
             let visibleRegion = self.projection.visibleRegion()
             let bounds = GMSCoordinateBounds(region: visibleRegion)
             let latitudeDelta = bounds.northEast.latitude - bounds.southWest.latitude
@@ -34,10 +32,15 @@ final class GoogleMapView : GMSMapView, Map {
             self.moveCamera(update)
         }
     }
+
+    func setRegion(region: MKCoordinateRegion, animated: Bool) {
+        self.region = region
+    }
+
     var provider : MapProvider {
         return .Google
     }
-    var view : GoogleMapView {
+    var view : UIView {
         return self
     }
 
@@ -68,12 +71,16 @@ final class GoogleMapView : GMSMapView, Map {
         self.selectedMarker = marker
     }
 
+    func deselectPlace() {
+        self.selectedMarker = nil
+    }
+
     // MARK: Helper
 
     func marker(annotation: MKAnnotation) -> GMSMarker {
         let marker = GMSMarker(position: annotation.coordinate)
-        marker.title = annotation.title
-        marker.snippet = annotation.subtitle
+        marker.title = annotation.title!
+        marker.snippet = annotation.subtitle!
         return marker
     }
 }

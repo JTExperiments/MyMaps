@@ -22,10 +22,10 @@ class MapView: UIView, Map {
     }
     var displaying : MapProvider = .Apple {
         didSet {
-            self.bringSubviewToFront(self.maps[self.displaying]!)
+            self.bringSubviewToFront(self.maps[self.displaying]!.view)
         }
     }
-    var view : MapView {
+    var view : UIView {
         return self
     }
     weak var delegate : MapViewDelegate?
@@ -33,35 +33,33 @@ class MapView: UIView, Map {
     private (set) var selectedPlace : Place? {
         didSet {
             if let place = selectedPlace {
-                self.maps
-                for (provider, map) in self.maps {
-                    map.region = self.region
-                }
                 self.delegate?.mapView(self, didTapPlace: place)
-            } else {
             }
         }
     }
-    var region : MKCoordinateRegion {
+    var region : MKCoordinateRegion = MKCoordinateRegion() {
         didSet {
-            for (provider, map) in self.maps {
-                map.region = self.region
+            for (_, map) in self.maps {
+                map.setRegion(region, animated: false)
             }
         }
+    }
+    func setRegion(region: MKCoordinateRegion, animated: Bool) {
+        self.region = region
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        let googleMap = GoogleMapView(frame: self.bounds)
-        googleMap.autoresizingMask = .FlexibleHeight | .FlexibleWidth
+        let googleMap = GMSMapView(frame: self.bounds)
+        googleMap.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         googleMap.myLocationEnabled = true
         self.addSubview(googleMap)
         googleMap.delegate = self
         self.maps[.Google] = googleMap
 
-        let appleMap = AppleMapView(frame: self.bounds)
-        appleMap.autoresizingMask = .FlexibleHeight | .FlexibleWidth
+        let appleMap = MKMapView(frame: self.bounds)
+        appleMap.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         appleMap.showsUserLocation = true
         self.addSubview(appleMap)
         appleMap.delegate = self
@@ -69,45 +67,61 @@ class MapView: UIView, Map {
     }
 
     func removePlaces(places: [Place]) {
-        self.maps
+        for (_, map) in self.maps {
+            map.removePlaces(places)
+        }
     }
 
     func addPlaces(places: [Place]) {
         self.places += places
-        self.appleMapView.addPlaces(places)
-        self.googleMapView.addPlaces(places)
-    }
-
-    func showPlaces(places: [Place]) {
-        self.places += places
-        self.appleMapView.showPlaces(places, animated: true)
-        self.googleMapView.showPlaces(places, animated: true)
-    }
-
-}
-
-extension MapView : MKMapViewDelegate {
-    func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
-        if self.displaying == .Apple {
-            println("Apple: changed region")
-            self.region = self.appleMapView.region
-            self.googleMapView.region = region
+        for (_, map) in self.maps {
+            map.addPlaces(places)
         }
     }
 
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+    func showPlaces(places: [Place], animated:Bool) {
+        self.places += places
+        for (_, map) in self.maps {
+            map.showPlaces(places, animated: animated)
+        }
+    }
+
+    func selectPlace(place: Place, animated: Bool) {
+        self.selectedPlace = place
+        for (_, map) in self.maps {
+            map.selectPlace(place, animated: animated)
+        }
+    }
+
+    func deselectPlace() {
+        self.selectedPlace = nil
+        for (_, map) in self.maps {
+            map.deselectPlace()
+        }
+    }
+}
+
+extension MapView : MKMapViewDelegate {
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        if self.displaying == .Apple {
+            print("Apple: changed region")
+            self.region = mapView.region
+        }
+    }
+
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         for place in self.places {
-            if view.annotation.coordinate.longitude == place.coordinate.longitude
-                && view.annotation.coordinate.latitude == place.coordinate.latitude
-                && view.annotation.title == place.title {
-                    self.selectedPlace = place
+            if view.annotation!.coordinate.longitude == place.coordinate.longitude
+                && view.annotation!.coordinate.latitude == place.coordinate.latitude
+                && view.annotation!.title! == place.title {
+                    self.selectPlace(place, animated: false)
                     break
             }
         }
     }
 
-    func mapView(mapView: MKMapView!, didDeselectAnnotationView view: MKAnnotationView!) {
-        self.selectedPlace = nil
+    func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
+        self.deselectPlace()
     }
 }
 
@@ -119,18 +133,21 @@ extension MapView : GMSMapViewDelegate {
                 && marker.position.latitude == place.coordinate.latitude
                 && marker.title == place.title
                 && marker.snippet == place.subtitle {
-                    self.selectedPlace = place
+                    self.selectPlace(place, animated: false)
                     return false
             }
         }
         return false
     }
 
+    func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
+        self.deselectPlace()
+    }
+
     func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
-        println("GMS: idle position \(position)")
+        print("GMS: idle position \(position)")
         if self.displaying == .Google {
-            self.region = self.googleMapView.region
-            self.appleMapView.region = region
+            self.region = mapView.region
         }
     }
 }

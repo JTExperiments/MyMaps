@@ -20,10 +20,10 @@
 		1A3C7B691B3023D200706B7A /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7B681B3023D200706B7A /* Place.swift */; };
 		1A3E3A671B3026A1009432EA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3E3A661B3026A1009432EA /* MapView.swift */; };
 		1A429A481B347457003C334C /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A429A471B347457003C334C /* Map.swift */; };
-		1A429A4B1B34752A003C334C /* MapSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A429A4A1B34752A003C334C /* MapSource.swift */; };
-		1A429A4D1B347695003C334C /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A429A4C1B347695003C334C /* GoogleMapView.swift */; };
-		1A429A4F1B3477F4003C334C /* AppleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A429A4E1B3477F4003C334C /* AppleMapView.swift */; };
-		D8E39CDC8FCF0C0279E46E6F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56236AE94D95498DDAD1BFBF /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1A429A4B1B34752A003C334C /* MapProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A429A4A1B34752A003C334C /* MapProvider.swift */; };
+		1A7C8AB01B3485BE00F92E88 /* GMSMapView+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A429A4C1B347695003C334C /* GMSMapView+Map.swift */; };
+		1AF3A7F21B3486A00056818D /* MKMapView+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A429A4E1B3477F4003C334C /* MKMapView+Map.swift */; };
+		653F2EFC618559737AD4D0B9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 991710CB9073351F36E097A6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,11 +54,11 @@
 		1A3C7B681B3023D200706B7A /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		1A3E3A661B3026A1009432EA /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		1A429A471B347457003C334C /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
-		1A429A4A1B34752A003C334C /* MapSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSource.swift; sourceTree = "<group>"; };
-		1A429A4C1B347695003C334C /* GoogleMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
-		1A429A4E1B3477F4003C334C /* AppleMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleMapView.swift; sourceTree = "<group>"; };
+		1A429A4A1B34752A003C334C /* MapProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapProvider.swift; sourceTree = "<group>"; };
+		1A429A4C1B347695003C334C /* GMSMapView+Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GMSMapView+Map.swift"; sourceTree = "<group>"; };
+		1A429A4E1B3477F4003C334C /* MKMapView+Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapView+Map.swift"; sourceTree = "<group>"; };
 		3A2AA4EF9687630E20C06DE2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		56236AE94D95498DDAD1BFBF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		991710CB9073351F36E097A6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDAB0D1F6CD1D415B5272EB6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,7 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A3C7B5E1B30074D00706B7A /* MapKit.framework in Frameworks */,
-				D8E39CDC8FCF0C0279E46E6F /* Pods.framework in Frameworks */,
+				653F2EFC618559737AD4D0B9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,9 +82,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A34242A1B3480050094F720 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
 		1A3C7B2F1B30070100706B7A = {
 			isa = PBXGroup;
 			children = (
+				1A34242A1B3480050094F720 /* Libraries */,
 				1A3C7B5F1B30075200706B7A /* Frameworks */,
 				1A3C7B3A1B30070100706B7A /* MyMaps */,
 				1A3C7B501B30070100706B7A /* MyMapsTests */,
@@ -146,7 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				1A3C7B5D1B30074D00706B7A /* MapKit.framework */,
-				56236AE94D95498DDAD1BFBF /* Pods.framework */,
+				991710CB9073351F36E097A6 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -175,8 +183,8 @@
 			children = (
 				1A3C7B641B300AB600706B7A /* SearchPlacesOperation.swift */,
 				1A3C7B681B3023D200706B7A /* Place.swift */,
-				1A429A4C1B347695003C334C /* GoogleMapView.swift */,
-				1A429A4E1B3477F4003C334C /* AppleMapView.swift */,
+				1A429A4C1B347695003C334C /* GMSMapView+Map.swift */,
+				1A429A4E1B3477F4003C334C /* MKMapView+Map.swift */,
 			);
 			name = Modals;
 			sourceTree = "<group>";
@@ -185,7 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				1A429A471B347457003C334C /* Map.swift */,
-				1A429A4A1B34752A003C334C /* MapSource.swift */,
+				1A429A4A1B34752A003C334C /* MapProvider.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -211,7 +219,6 @@
 				1A3C7B351B30070100706B7A /* Frameworks */,
 				1A3C7B361B30070100706B7A /* Resources */,
 				2E26DE10CFBEF80EBAF35E38 /* Copy Pods Resources */,
-				1AEAAF3041AE17BA88F22F66 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -247,7 +254,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "James Tang";
 				TargetAttributes = {
 					1A3C7B371B30070100706B7A = {
@@ -299,21 +306,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1AEAAF3041AE17BA88F22F66 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2E26DE10CFBEF80EBAF35E38 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -357,11 +349,11 @@
 				1A3C7B651B300AB600706B7A /* SearchPlacesOperation.swift in Sources */,
 				1A3C7B611B3007A800706B7A /* RootViewController.swift in Sources */,
 				1A3C7B691B3023D200706B7A /* Place.swift in Sources */,
-				1A429A4B1B34752A003C334C /* MapSource.swift in Sources */,
+				1AF3A7F21B3486A00056818D /* MKMapView+Map.swift in Sources */,
+				1A7C8AB01B3485BE00F92E88 /* GMSMapView+Map.swift in Sources */,
+				1A429A4B1B34752A003C334C /* MapProvider.swift in Sources */,
 				1A3C7B631B30091D00706B7A /* MapViewController.swift in Sources */,
-				1A429A4D1B347695003C334C /* GoogleMapView.swift in Sources */,
 				1A3C7B671B30221500706B7A /* PlaceTableViewCell.swift in Sources */,
-				1A429A4F1B3477F4003C334C /* AppleMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +416,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -491,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MyMaps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamztang.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -502,6 +496,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MyMaps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamztang.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -520,6 +515,7 @@
 				);
 				INFOPLIST_FILE = MyMapsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamztang.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyMaps.app/MyMaps";
 			};
@@ -535,6 +531,7 @@
 				);
 				INFOPLIST_FILE = MyMapsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamztang.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyMaps.app/MyMaps";
 			};

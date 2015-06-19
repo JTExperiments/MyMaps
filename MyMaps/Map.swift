@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 James Tang. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import MapKit
 
 protocol Map : class {
 
-    var region : MKCoordinateRegion { get set }
+    var region : MKCoordinateRegion { get }
     var provider : MapProvider { get }
     var view : UIView { get }
 
@@ -19,7 +19,8 @@ protocol Map : class {
     func removePlaces(places: [Place])
     func showPlaces(places: [Place], animated: Bool)
 
+    func deselectPlace()
     func selectPlace(place: Place, animated: Bool)
-
+    func setRegion(region: MKCoordinateRegion, animated: Bool)
 }
 

@@ -9,17 +9,17 @@
 import UIKit
 import MapKit
 
-public class Place : NSObject, MKAnnotation, Equatable {
+public class Place : NSObject, MKAnnotation {
 
     let mapItem: MKMapItem
 
-    public var title : String {
+    public var title : String? {
         get {
             return mapItem.name
         }
     }
 
-    public var subtitle : String {
+    public var subtitle : String? {
         get {
             return mapItem.placemark.title
         }

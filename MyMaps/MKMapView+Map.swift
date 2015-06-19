@@ -6,30 +6,32 @@
 //  Copyright (c) 2015 James Tang. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import MapKit
 
-final class AppleMapView : MKMapView, Map {
+extension MKMapView : Map {
     var provider : MapProvider {
         return .Apple
     }
-    var view : AppleMapView {
+    var view : UIView {
         return self
     }
 
     func addPlaces(places: [Place]) {
         self.addAnnotations(places)
     }
-
     func removePlaces(places: [Place]) {
         self.removeAnnotations(places)
     }
-
     func showPlaces(places: [Place], animated: Bool) {
         self.showAnnotations(places, animated: animated)
     }
-
     func selectPlace(place: Place, animated: Bool) {
-        self.selectPlace(place, animated: animated)
+        self.selectAnnotation(place, animated: animated)
+    }
+    func deselectPlace() {
+        for annotation in self.selectedAnnotations {
+            self.deselectAnnotation(annotation, animated: false)
+        }
     }
 }

@@ -91,9 +91,7 @@ public class SearchPlacesOperation:BaseOperation {
                     if let response = self.response {
                         places = []
                         for mapItem in response.mapItems {
-                            if let item = mapItem as? MKMapItem {
-                                places?.append(Place(mapItem: item))
-                            }
+                            places?.append(Place(mapItem: mapItem))
                         }
                     }
 
