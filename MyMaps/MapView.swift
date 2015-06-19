@@ -66,15 +66,15 @@ class MapView: UIView {
     func showPlaces(places: [Place]) {
         self.places += places
         self.appleMapView.showAnnotations(places, animated: true)
-        self.googleMapView.addAnnotations(places)
+        self.googleMapView.showAnnotations(places, animated: true)
     }
 
 }
 
 extension MapView : MKMapViewDelegate {
     func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
-        println("Apple: changed region")
         if self.provider == .Apple {
+            println("Apple: changed region")
             self.region = self.appleMapView.region
             self.googleMapView.region = region
         }
@@ -154,5 +154,15 @@ extension GMSMapView {
 
     func removeAnnotations() {
         self.clear()
+    }
+
+    func showAnnotations(annotations: [MKAnnotation], animated: Bool) {
+        var bounds = GMSCoordinateBounds()
+        self.addAnnotations(annotations)
+        for annotation in annotations {
+            bounds = bounds.includingCoordinate(annotation.coordinate)
+        }
+        let update = GMSCameraUpdate.fitBounds(bounds)
+        self.moveCamera(update)
     }
 }
