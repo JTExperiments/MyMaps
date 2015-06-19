@@ -35,7 +35,22 @@ class MapView: UIView {
     }
     weak var delegate : MapViewDelegate?
     private (set) var places : [Place] = []
-    var region : MKCoordinateRegion!
+    private (set) var selectedPlace : Place? {
+        didSet {
+            if let place = selectedPlace {
+
+                if self.provider == .Apple {
+                    self.googleMapView.selectAnnotation(place, animated: true)
+                } else {
+                    self.appleMapView.selectAnnotation(place, animated: true)
+                }
+
+                self.delegate?.mapView(self, didTapPlace: place)
+            } else {
+            }
+        }
+    }
+    private (set) var region : MKCoordinateRegion!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -80,18 +95,20 @@ extension MapView : MKMapViewDelegate {
         }
     }
 
-
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
         for place in self.places {
             if view.annotation.coordinate.longitude == place.coordinate.longitude
                 && view.annotation.coordinate.latitude == place.coordinate.latitude
                 && view.annotation.title == place.title {
-                    self.delegate?.mapView(self, didTapPlace: place)
+                    self.selectedPlace = place
                     break
             }
         }
     }
 
+    func mapView(mapView: MKMapView!, didDeselectAnnotationView view: MKAnnotationView!) {
+        self.selectedPlace = nil
+    }
 }
 
 extension MapView : GMSMapViewDelegate {
@@ -102,7 +119,7 @@ extension MapView : GMSMapViewDelegate {
                 && marker.position.latitude == place.coordinate.latitude
                 && marker.title == place.title
                 && marker.snippet == place.subtitle {
-                    self.delegate?.mapView(self, didTapPlace: place)
+                    self.selectedPlace = place
                     return false
             }
         }
@@ -143,11 +160,16 @@ extension GMSMapView {
         }
     }
 
+    func marker(annotation: MKAnnotation) -> GMSMarker {
+        let marker = GMSMarker(position: annotation.coordinate)
+        marker.title = annotation.title
+        marker.snippet = annotation.subtitle
+        return marker
+    }
+
     func addAnnotations(annotations: [MKAnnotation]) {
         for annotation in annotations {
-            let marker = GMSMarker(position: annotation.coordinate)
-            marker.title = annotation.title
-            marker.snippet = annotation.subtitle
+            let marker = self.marker(annotation)
             marker.map = self
         }
     }
@@ -164,5 +186,11 @@ extension GMSMapView {
         }
         let update = GMSCameraUpdate.fitBounds(bounds)
         self.moveCamera(update)
+    }
+
+    func selectAnnotation(annotation: MKAnnotation, animated:Bool) {
+        let marker = self.marker(annotation)
+        marker.map = self
+        self.selectedMarker = marker
     }
 }
