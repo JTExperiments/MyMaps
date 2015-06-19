@@ -16,7 +16,14 @@ extension MKMapView : Map {
     var view : UIView {
         return self
     }
-
+    var enableUserLocation : Bool {
+        set {
+            self.showsUserLocation = newValue
+        }
+        get {
+            return self.showsUserLocation
+        }
+    }
     func addPlaces(places: [Place]) {
         self.addAnnotations(places)
     }

@@ -13,13 +13,14 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let locationManager : CLLocationManager = CLLocationManager()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
         GMSServices.provideAPIKey("AIzaSyDpC9OSAIn-wJaaBeUagxbcz4QfJF07tzs")
-        CLLocationManager().requestWhenInUseAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+    
         return true
     }
 

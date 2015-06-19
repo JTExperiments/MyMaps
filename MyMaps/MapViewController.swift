@@ -28,6 +28,7 @@ class MapViewController: RootViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.delegate = self
+        self.mapView.enableUserLocation = true
     }
 
     func reloadState() {

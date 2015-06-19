@@ -14,6 +14,7 @@ protocol Map : class {
     var region : MKCoordinateRegion { get }
     var provider : MapProvider { get }
     var view : UIView { get }
+    var enableUserLocation : Bool { get set }
 
     func addPlaces(places: [Place])
     func removePlaces(places: [Place])

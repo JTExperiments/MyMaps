@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import GoogleMaps
+import CoreLocation
 
 protocol MapViewDelegate : class {
     func mapView(mapView: MapView, didTapPlace place: Place)
@@ -16,6 +17,7 @@ protocol MapViewDelegate : class {
 
 class MapView: UIView, Map {
 
+    let locationManager = CLLocationManager()
     private var maps : [MapProvider:Map] = [:]
     var provider : MapProvider {
         return .Custom
@@ -27,6 +29,13 @@ class MapView: UIView, Map {
     }
     var view : UIView {
         return self
+    }
+    var enableUserLocation : Bool = false {
+        didSet {
+            for (_, map) in self.maps {
+                map.enableUserLocation = self.enableUserLocation
+            }
+        }
     }
     weak var delegate : MapViewDelegate?
     private (set) var places : [Place] = []
@@ -53,14 +62,12 @@ class MapView: UIView, Map {
 
         let googleMap = GMSMapView(frame: self.bounds)
         googleMap.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-        googleMap.myLocationEnabled = true
         self.addSubview(googleMap)
         googleMap.delegate = self
         self.maps[.Google] = googleMap
 
         let appleMap = MKMapView(frame: self.bounds)
         appleMap.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-        appleMap.showsUserLocation = true
         self.addSubview(appleMap)
         appleMap.delegate = self
         self.maps[.Apple] = appleMap

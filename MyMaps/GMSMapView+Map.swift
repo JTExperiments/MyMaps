@@ -32,7 +32,14 @@ extension GMSMapView : Map {
             self.moveCamera(update)
         }
     }
-
+    var enableUserLocation : Bool {
+        set {
+            self.myLocationEnabled = newValue
+        }
+        get {
+            return self.myLocationEnabled
+        }
+    }
     func setRegion(region: MKCoordinateRegion, animated: Bool) {
         self.region = region
     }
