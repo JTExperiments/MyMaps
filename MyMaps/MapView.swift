@@ -73,11 +73,13 @@ class MapView: UIView {
 
 extension MapView : MKMapViewDelegate {
     func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
+        println("Apple: changed region")
         if self.provider == .Apple {
             self.region = self.appleMapView.region
             self.googleMapView.region = region
         }
     }
+
 
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
         for place in self.places {
@@ -106,22 +108,37 @@ extension MapView : GMSMapViewDelegate {
         }
         return false
     }
+
+    func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
+        println("GMS: idle position \(position)")
+        if self.provider == .Google {
+            self.region = self.googleMapView.region
+            self.appleMapView.region = region
+        }
+    }
 }
 
 extension GMSMapView {
 
+    // stackoverflow http://stackoverflow.com/a/30938225/1013897
     var region : MKCoordinateRegion {
         get {
-            return MKCoordinateRegion()
+            let position = self.camera
+            let visibleRegion = self.projection.visibleRegion()
+            let bounds = GMSCoordinateBounds(region: visibleRegion)
+            let latitudeDelta = bounds.northEast.latitude - bounds.southWest.latitude
+            let longitudeDelta = bounds.northEast.longitude - bounds.southWest.longitude
+            let center = CLLocationCoordinate2DMake(
+                (bounds.southWest.latitude + bounds.northEast.latitude) / 2,
+                (bounds.southWest.longitude + bounds.northEast.longitude) / 2)
+            let span = MKCoordinateSpanMake(latitudeDelta, longitudeDelta)
+            return MKCoordinateRegionMake(center, span)
         }
         set {
-            let radius : Double = 25*1000
-            let distance = MKCoordinateRegionMakeWithDistance(newValue.center, radius*2, radius*2)
             let northEast = CLLocationCoordinate2DMake(newValue.center.latitude - newValue.span.latitudeDelta/2, newValue.center.longitude - newValue.span.longitudeDelta/2)
             let southWest = CLLocationCoordinate2DMake(newValue.center.latitude + newValue.span.latitudeDelta/2, newValue.center.longitude + newValue.span.longitudeDelta/2)
-
             let bounds = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
-            let update = GMSCameraUpdate.fitBounds(bounds)
+            let update = GMSCameraUpdate.fitBounds(bounds, withPadding: 0)
             self.moveCamera(update)
         }
     }
