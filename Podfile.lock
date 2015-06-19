@@ -1,10 +1,13 @@
 PODS:
+  - ExSwift (0.1.9)
   - GoogleMaps (1.10.0)
 
 DEPENDENCIES:
+  - ExSwift (~> 0.1.9)
   - GoogleMaps (~> 1.10.0)
 
 SPEC CHECKSUMS:
+  ExSwift: 66c4dcef758ad184556954610ecadcabad3c1b36
   GoogleMaps: 8eafd25b658a6401ca45a185700716c4a9e9edf2
 
 COCOAPODS: 0.37.1
