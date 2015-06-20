@@ -41,7 +41,8 @@ class MapViewController: RootViewController {
         self.mapView.removePlaces(self.mapView.places)
         self.mapView.showPlaces(self.places, animated:true)
 
-        self.listHeightConstraint.constant = self.showList ? self.view.frame.size.height / 2 : 0
+        let rowHeight = self.selectedPlace != nil ? self.tableView.rowHeight : 0
+        self.listHeightConstraint.constant = self.showList ? self.view.frame.size.height / 2 : rowHeight
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
@@ -111,7 +112,6 @@ extension MapViewController : UITableViewDataSource {
 
         cell.name = place.title
         cell.address = place.subtitle
-        cell.accessoryType = place == self.selectedPlace ? .Checkmark : .None
 
         return cell
     }
@@ -121,11 +121,18 @@ extension MapViewController : MapViewDelegate {
 
     func mapView(mapView: MapView, didTapPlace place: Place) {
         self.selectedPlace = place
-        if let row = self.places.indexOf(place) {
-            let indexPath = NSIndexPath(forRow: row, inSection: 0)
-            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
-            self.tableView.reloadData()
+        if let index = self.places.indexOf(place) {
+            self.places.removeAtIndex(index)
         }
+        self.places.insert(place, atIndex: 0)
+
+        self.listHeightConstraint.constant = self.tableView.rowHeight
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+
+        self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+        self.tableView.reloadData()
 
     }
 

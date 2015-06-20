@@ -86,8 +86,9 @@ extension GMSMapView : Map {
 
     func marker(annotation: MKAnnotation) -> GMSMarker {
         let marker = GMSMarker(position: annotation.coordinate)
-        marker.title = annotation.title!
-        marker.snippet = annotation.subtitle!
+//        marker.title = annotation.title!
+//        marker.snippet = annotation.subtitle!
+//        
         return marker
     }
 }

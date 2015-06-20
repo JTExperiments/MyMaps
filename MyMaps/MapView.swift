@@ -163,6 +163,25 @@ extension MapView : MKMapViewDelegate {
         }
     }
 
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation.isKindOfClass(MKUserLocation.self) {
+            return nil
+        }
+
+        let view = mapView.dequeueReusableAnnotationViewWithIdentifier("annotation") ?? MKPinAnnotationView(annotation: annotation, reuseIdentifier: "annotation")
+
+//        view.canShowCallout = true
+//        let addButton = UIButton(type: UIButtonType.ContactAdd)
+//        addButton.frame = CGRectMake(0, 0, 44, 44)
+//        view.rightCalloutAccessoryView = addButton
+
+        return view
+    }
+//
+//    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//        print("accessoryControl tapped: \(control)")
+//    }
+
 }
 
 extension MapView : GMSMapViewDelegate {
@@ -171,8 +190,8 @@ extension MapView : GMSMapViewDelegate {
         for place in self.places {
             if marker.position.longitude == place.coordinate.longitude
                 && marker.position.latitude == place.coordinate.latitude
-                && marker.title == place.title
-                && marker.snippet == place.subtitle {
+                /* && marker.title == place.title
+                && marker.snippet == place.subtitle */ {
                     self.selectPlace(place, animated: false)
                     return false
             }

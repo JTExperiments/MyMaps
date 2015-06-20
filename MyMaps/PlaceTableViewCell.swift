@@ -10,6 +10,9 @@ import UIKit
 
 class PlaceTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+
     var name : String? { didSet { self.reloadData() } }
     var address : String? { didSet { self.reloadData() } }
 
@@ -25,8 +28,8 @@ class PlaceTableViewCell: UITableViewCell {
     }
 
     func reloadData() {
-        self.textLabel?.text = self.name
-        self.detailTextLabel?.text = self.address
+        self.nameLabel.text = self.name
+        self.addressLabel.text = self.address
     }
 
 }
