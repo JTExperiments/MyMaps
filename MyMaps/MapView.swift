@@ -17,6 +17,14 @@ protocol MapViewDelegate : class {
 
 class MapView: UIView, Map {
 
+    enum TrackingState {
+        case Disabled
+        case Tracking
+        case Located
+        case Zoomed
+        case Detached
+    }
+
     let locationManager = CLLocationManager()
     private var maps : [MapProvider:Map] = [:]
     var provider : MapProvider {
@@ -34,6 +42,12 @@ class MapView: UIView, Map {
         didSet {
             for (_, map) in self.maps {
                 map.enableUserLocation = self.enableUserLocation
+            }
+
+            if enableUserLocation {
+                self.trackingState = .Tracking
+            } else {
+                self.trackingState = .Disabled
             }
         }
     }
@@ -53,6 +67,7 @@ class MapView: UIView, Map {
             }
         }
     }
+    private var trackingState : TrackingState = .Disabled
     func setRegion(region: MKCoordinateRegion, animated: Bool) {
         self.region = region
     }
@@ -71,6 +86,8 @@ class MapView: UIView, Map {
         self.addSubview(appleMap)
         appleMap.delegate = self
         self.maps[.Apple] = appleMap
+
+        appleMap.userTrackingMode = .Follow
     }
 
     func removePlaces(places: [Place]) {
@@ -114,6 +131,12 @@ extension MapView : MKMapViewDelegate {
             print("Apple: changed region")
             self.region = mapView.region
         }
+
+        if self.trackingState == .Located {
+            self.trackingState = .Zoomed
+        } else if self.trackingState == .Zoomed {
+            self.trackingState = .Detached
+        }
     }
 
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
@@ -130,6 +153,13 @@ extension MapView : MKMapViewDelegate {
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
         self.deselectPlace()
     }
+
+    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+        if self.trackingState == .Tracking {
+            self.trackingState = .Located
+        }
+    }
+
 }
 
 extension MapView : GMSMapViewDelegate {
@@ -157,4 +187,6 @@ extension MapView : GMSMapViewDelegate {
             self.region = mapView.region
         }
     }
+
+
 }
