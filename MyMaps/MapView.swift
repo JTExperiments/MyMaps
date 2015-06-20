@@ -62,8 +62,10 @@ class MapView: UIView, Map {
     }
     var region : MKCoordinateRegion = MKCoordinateRegion() {
         didSet {
-            for (_, map) in self.maps {
-                map.setRegion(region, animated: false)
+            for (provider, map) in self.maps {
+                if provider != self.displaying {
+                    map.setRegion(region, animated: false)
+                }
             }
         }
     }
@@ -71,6 +73,7 @@ class MapView: UIView, Map {
     func setRegion(region: MKCoordinateRegion, animated: Bool) {
         self.region = region
     }
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
